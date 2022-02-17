@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html  ng-app="baskara">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+    <style>
+            *{
+                background-color: rgb(84, 169, 243);
+            }
+     .entrada{
+        display: flex;   
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 20px;
+     }
+
+     .res{   
+        display: flex;   
+        flex-direction: column;
+        justify-content: center;
+        color: cornsilk;
+        text-size-adjust: 20%;
+        
+        width: 300px;
+        height: 160px;
+        margin-top: 50px;
+        
+     }
+     p{
+         display: flex;
+         justify-content: left;
+         margin-left: 50px;
+         padding: 10px;
+         border-radius: 10px;
+         font-weight: bold;
+         
+
+     }
+
+     .res1{
+        background-color:darkseagreen;
+     }
+
+     .res2{
+        background-color:rgba(99, 191, 233, 0.774);
+     }
+
+     .res3{
+        background-color:rgb(235, 194, 83);
+     }
+
+     .res4{
+        background-color:rgb(106, 35, 134);
+     }
+     .input{
+         background-color: darkslateblue;
+         padding: 10px;
+     }
+   
+    </style>
+    
+    <script src="angular.js"></script>
+    <script>
+        angular.module("baskara",[]);
+        angular.module("baskara").controller("baskaraCtrl",function($scope){
+            $scope.app = "baskara";
+           
+
+            $scope.adicionar = function (a,b,c){
+                $scope.A = a;
+                $scope.B = b;
+                $scope.C = c;
+                
+                $scope.C
+                $scope.delta = (parseFloat(b)*parseFloat(b))-(4*parseFloat(a)*parseFloat(c));
+                $scope.raiz = Math.sqrt($scope.delta);
+                if($scope.delta > 0){
+                    
+                    $scope.x1=(((-1)*parseFloat(b))+$scope.raiz)/(2*parseFloat(a));
+                    $scope.x2=(((-1)*parseFloat(b))-$scope.raiz)/(2*parseFloat(a));
+                }else if($scope.delta == 0){
+                    $scope.x1=(((-1)*parseFloat(b))+$scope.raiz)/(2*parseFloat(a));
+                    $scope.x2=(((-1)*parseFloat(b))-$scope.raiz)/(2*parseFloat(a));
+                }else{
+                    $scope.x1 = "Não possui raiz real";
+                }
+                
+          
+            };
+        });
+
+        
+
+      
+
+    </script>
+  
+</head>
+<body>
+    <div ng-controller="baskaraCtrl"class="entrada">
+        <div class="input">
+            <input type="text" placeholder="A" ng-model="a">
+            <input type="text" placeholder="B"  ng-model="b">
+            <input type="text" placeholder="C" ng-model="c">
+            <button class="btn" ng-click="adicionar(a,b,c)">Calcular</button>
+        </div>
+        
+        <div class="res" >
+            <p class="res1"> Delta = {{delta}} </p>
+            <p class="res2"> Raiz= {{raiz}}</p>
+            <p class="res3"> X1 = {{x1}}</p>
+            <p class="res4"> X2 = {{x2}}</p>
+            
+     
+         </div>
+    </div>
+   
+
+</body>
+</html>

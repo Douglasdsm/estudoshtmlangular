@@ -1,0 +1,90 @@
+<!DOCTYPE >
+<html lang="pt" ng-app="listaTelefonica">
+<head>
+    
+    <title>Lista Telefonica</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+    <style>
+        .jumbotron{
+            width: 600px;
+            height: 500px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+        }
+        .table{
+            margin-top: 20px;
+
+        }
+        .form-control{
+            margin-bottom: 5px;
+            
+        }
+        .selecionado{
+            background-color: rgb(192, 226, 43);;
+        }
+    </style>
+    <script src="angular-1.8.2/angular.js"></script>
+    <script>
+        angular.module("listaTelefonica",[]);
+        angular.module("listaTelefonica").controller("listaTelefonicaCtrl",function($scope){
+                $scope.app = "Cronograma Limpeza";
+                $scope.contatos = [
+                    {nome:"Douglas", Telefone:"065996962505"},
+                    {nome:"Deivid", Telefone:"065996862593"},
+                    {nome:"Thaila", Telefone:"065993962501"},
+                    {nome:"Marta", Telefone:"069993962507"},
+                ];
+
+                $scope.semana = [
+                    {nome:"Segunda-Feira", codigo:1 },
+                    {nome:"Terça-Feira", codigo:2 },
+                    {nome:"Quarta-Feira", codigo:3 },
+                    {nome:"Quinta-Feira", codigo:4 },
+                    {nome:"Sexta-Feira", codigo:5 }
+                ];
+
+                $scope.adicionarContato = function(contato){
+                    $scope.contatos.push(angular.copy(contato))
+                    delete $scope.contato;
+                };
+                $scope.classe = "selecionado";
+        });
+    </script>
+</head>
+<body ng-controller="listaTelefonicaCtrl">
+    <div class="jumbotron">
+        <hr/>
+        <h3 ng-bind="app"></h3>
+        {{contato.dia.nome}}
+        <table class="table">
+            <tr> 
+                <th>Dia</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <td>Realizado</td>
+                <th>Multa</th>
+            </tr>
+            <hr/>
+            <tr ng-repeat = "contato in contatos" ng-class="classe">
+                <td>{{contato.dia.nome}}</td>
+                <td>{{contato.nome}}</td>
+                <td>{{contato.Telefone}}</td>
+                <th><input type="checkbox" ng-model="dado.realizado"></th>
+                
+            </tr>
+        </table>
+        
+        <input class= "form-control" type="text" ng-model="dado.nome" placeholder="Nome"/>
+        <input class= "form-control" type="text" ng-model="dado.Telefone"placeholder="Telefone"/>
+        <select class= "form-control" ng-model="dado.dia" ng-options="dia.nome for dia in semana">
+            <option value="">Selecione o dia</option>
+        </select>
+        <button class="btn btn-primary btn-block" ng-click= "adicionarContato(dado)" ng-disabled="!dado.nome || !dado.Telefone || !dado.dia"  >Adcionar</button>
+        {{contato}}
+        
+    </div>
+    
+</body>
+</html>
